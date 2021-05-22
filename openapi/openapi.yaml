@@ -1,0 +1,38 @@
+openapi: 3.0.2
+info:
+  title: formaTAPIRest
+  description: Conversion between a multitude of Data Formats used in science and engeneering
+  version: 0.0.1
+  contact:
+    name: Michael Klix
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: http://localhost/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://localhost/
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /convert/png/to/jpg:
+    post:
+      tags:
+      - Image
+      summary: Convert a JPG image to PNG
+      description: Uses ImageMagick to convert a JPG image to PNG
+      operationId: ConvertImagePNG2JPG
+      # multiple, specific media types may be specified:
+      requestBody:
+        content:
+          'image/png':
+            schema:
+              type: string
+              format: binary 
+      responses:
+        '200':
+          description: Input image converted to JPG format
+          content:
+            image/jpg:
+              schema:
+                type: string
+                format: binary
