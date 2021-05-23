@@ -36,6 +36,6 @@ def convert_pwi_zmz_xml2mz_ml(body=None):  # noqa: E501
         with open(outfilename, 'rb') as outfile:
             data = outfile.read()
     finally:
-        print ("rm") # shutil.rmtree(directory_name, ignore_errors=True)
+        shutil.rmtree(directory_name, ignore_errors=True)
 
     return data
