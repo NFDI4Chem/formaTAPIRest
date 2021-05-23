@@ -23,13 +23,23 @@ def convert_pwi_zmz_xml2mz_ml(body=None):  # noqa: E501
         directory_name = tempfile.mkdtemp()
         infilename = directory_name+'/input.mzXML'
         outfilename = directory_name+'/output.mzML'
+        dockerimage = "chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:latest"
         with open(infilename, 'wb') as infile:
             infile.write(body)
+
+            # cmd = ["docker", "run", "--rm", \
+            #         "-v", directory_name+":"+directory_name, \
+            #         dockerimage, \
+            #         "wine", "msconvert", \
+            #         infilename, \
+            #         "--outdir", directory_name, \
+            #         "--outfile", "output.mzML"]
 
             cmd = ["/usr/bin/msconvert", \
                     infilename, \
                     "--outdir", directory_name, \
                     "--outfile", "output.mzML"]
+
             print (cmd, file=sys.stderr)
             subprocess.call(cmd, shell=False)
 
