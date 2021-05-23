@@ -3,7 +3,7 @@ info:
   contact:
     name: Michael Klix
   description: Conversion between a multitude of Data Formats used in science and
-    engeneering
+    engineering
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html

@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: formaTAPIRest
-  description: Conversion between a multitude of Data Formats used in science and engeneering
+  description: Conversion between a multitude of Data Formats used in science and engineering
   version: 0.0.1
   contact:
     name: Michael Klix

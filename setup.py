@@ -33,7 +33,7 @@ setup(
     entry_points={
         'console_scripts': ['openapi_server=openapi_server.__main__:main']},
     long_description="""\
-    Conversion between a multitude of Data Formats used in science and engeneering
+    Conversion between a multitude of Data Formats used in science and engineering
     """
 )
 
