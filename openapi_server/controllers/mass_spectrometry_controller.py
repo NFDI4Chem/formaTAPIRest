@@ -5,16 +5,17 @@ import subprocess
 from openapi_server import util
 
 
-def convert_pwi_zmz_data2mz_ml(body=None):  # noqa: E501
-    """Convert a JPG image to PNG
+def convert_pwi_zmz_xml2mz_ml(body=None):  # noqa: E501
+    """Convert mzXML mass spectrometry raw data to mzML
 
-    Uses ImageMagick to convert a JPG image to PNG # noqa: E501
+    Uses Proteowizard MSConvert to convert an mzXML file into mzML # noqa: E501
 
     :param body:
     :type body: str
 
     :rtype: file
     """
+
     with open('/tmp/input.mzData', 'wb') as infile:
         infile.write(body)
 
@@ -26,4 +27,5 @@ def convert_pwi_zmz_data2mz_ml(body=None):  # noqa: E501
 
     with open('/tmp/output.mzML', 'rb') as outfile:
         data = outfile.read()
+
     return data

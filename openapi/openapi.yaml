@@ -21,7 +21,6 @@ paths:
       summary: Convert a JPG image to PNG
       description: Uses ImageMagick to convert a JPG image to PNG
       operationId: ConvertImagePNG2JPG
-      # multiple, specific media types may be specified:
       requestBody:
         content:
           'image/png':
@@ -36,27 +35,28 @@ paths:
               schema:
                 type: string
                 format: binary
-  /convert/mzData/to/mzML:
+  /convert/mzXML/to/mzML:
     post:
       tags:
       - Mass Spectrometry
-      summary: Convert a JPG image to PNG
-      description: Uses Proteowizard MSConvert to convert an mzData file into mzML
-      operationId: ConvertPWIZmzData2mzML
-      # multiple, specific media types may be specified:
+      summary: Convert mzXML mass spectrometry raw data to mzML
+      description: Uses Proteowizard MSConvert to convert an mzXML file into mzML
+      operationId: ConvertPWIZmzXML2mzML
       requestBody:
         content:
           'application/xml:':
             schema:
               type: string
               format: binary 
-
+          'application/octet-stream':
+            schema:
+              type: string
+              format: binary 
       responses:
         '200':
-          description: Input image converted to JPG format
+          description: Result file in mzML format
           content:
             'application/xml:':
               schema:
                 type: string
                 format: binary 
-
