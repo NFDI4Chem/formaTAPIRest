@@ -21,16 +21,14 @@ paths:
       operationId: convert_pwi_zmz_data2mz_ml
       requestBody:
         content:
-          image/png:
+          'application/xml:':
             schema:
-              format: binary
               type: string
       responses:
         "200":
           content:
-            image/jpg:
+            'application/xml:':
               schema:
-                format: binary
                 type: string
           description: Input image converted to JPG format
       summary: Convert a JPG image to PNG
