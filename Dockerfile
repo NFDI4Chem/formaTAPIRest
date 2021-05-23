@@ -1,4 +1,17 @@
-FROM python:3-alpine
+FROM python:3-buster
+
+##
+## Install OS Dependencies
+##
+
+RUN apt-get update && apt-get install -y \
+  libpwiz-tools \
+  imagemagick \
+  && rm -rf /var/lib/apt/lists/*
+
+##
+## Install App
+##
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

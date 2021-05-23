@@ -1,5 +1,6 @@
 import connexion
 import six
+import subprocess
 
 from openapi_server import util
 
@@ -14,7 +15,13 @@ def convert_image_png2_jpg(body=None):  # noqa: E501
 
     :rtype: file
     """
-    with open('/tmp/kitten.png', 'rb') as outfile:
-        data = outfile.read() #we are assigning a variable which will read whatever in the file and it will be stored in the variable called data.
+
+    with open('/tmp/input.png', 'wb') as infile:
+        infile.write(body)
+
+    subprocess.call(["/usr/bin/convert", "/tmp/input.png", "/tmp/output.jpg"], shell=False)
+
+    with open('/tmp/output.jpg', 'rb') as outfile:
+        data = outfile.read()
 
     return data
