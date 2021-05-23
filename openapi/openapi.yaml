@@ -9,8 +9,8 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
-  - url: http://localhost/v1
-    description: Optional server description, e.g. Main (production) server
+  - url: http://msbi.ipb-halle.de/formaTAPIRest/v1
+    description: Public test server @ IPB Halle, e.g. nearly Main (production) server
   - url: http://localhost/
     description: Optional server description, e.g. Internal staging server for testing
 paths:
@@ -26,7 +26,7 @@ paths:
           'image/png':
             schema:
               type: string
-              format: binary 
+              format: binary
       responses:
         '200':
           description: Input image converted to JPG format
@@ -47,11 +47,11 @@ paths:
           'application/xml:':
             schema:
               type: string
-              format: binary 
+              format: binary
           'application/octet-stream':
             schema:
               type: string
-              format: binary 
+              format: binary
       responses:
         '200':
           description: Result file in mzML format
@@ -59,4 +59,4 @@ paths:
             'application/xml:':
               schema:
                 type: string
-                format: binary 
+                format: binary
