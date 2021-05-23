@@ -1,6 +1,9 @@
 import connexion
 import six
 import subprocess
+import tempfile
+import sys
+import shutil
 
 from openapi_server import util
 
@@ -16,12 +19,20 @@ def convert_image_png2_jpg(body=None):  # noqa: E501
     :rtype: file
     """
 
-    with open('/tmp/input.png', 'wb') as infile:
-        infile.write(body)
+    try:
+        directory_name = tempfile.mkdtemp()
+        infilename = directory_name+'/input.png'
+        outfilename = directory_name+'/output.jpg'
+        with open(infilename, 'wb') as infile:
+            infile.write(body)
 
-    subprocess.call(["/usr/bin/convert", "/tmp/input.png", "/tmp/output.jpg"], shell=False)
+            cmd = ["/usr/bin/convert", infilename, outfilename]
+            print (cmd, file=sys.stderr)            
+            subprocess.call(cmd, shell=False)
 
-    with open('/tmp/output.jpg', 'rb') as outfile:
-        data = outfile.read()
+        with open(outfilename, 'rb') as outfile:
+            data = outfile.read()
+    finally:
+        shutil.rmtree(directory_name, ignore_errors=True)
 
     return data
