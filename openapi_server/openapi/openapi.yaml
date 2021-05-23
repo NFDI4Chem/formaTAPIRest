@@ -15,6 +15,28 @@ servers:
 - description: Optional server description, e.g. Internal staging server for testing
   url: http://localhost/
 paths:
+  /convert/mzData/to/mzML:
+    post:
+      description: Uses ImageMagick to convert a JPG image to PNG
+      operationId: convert_pwi_zmz_data2mz_ml
+      requestBody:
+        content:
+          image/png:
+            schema:
+              format: binary
+              type: string
+      responses:
+        "200":
+          content:
+            image/jpg:
+              schema:
+                format: binary
+                type: string
+          description: Input image converted to JPG format
+      summary: Convert a JPG image to PNG
+      tags:
+      - Mass Spectrometry
+      x-openapi-router-controller: openapi_server.controllers.mass_spectrometry_controller
   /convert/png/to/jpg:
     post:
       description: Uses ImageMagick to convert a JPG image to PNG
