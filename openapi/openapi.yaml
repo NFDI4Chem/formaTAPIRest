@@ -36,3 +36,25 @@ paths:
               schema:
                 type: string
                 format: binary
+  /convert/mzData/to/mzML:
+    post:
+      tags:
+      - Mass Spectrometry
+      summary: Convert a JPG image to PNG
+      description: Uses ImageMagick to convert a JPG image to PNG
+      operationId: ConvertPWIZmzData2mzML
+      # multiple, specific media types may be specified:
+      requestBody:
+        content:
+          'image/png':
+            schema:
+              type: string
+              format: binary 
+      responses:
+        '200':
+          description: Input image converted to JPG format
+          content:
+            image/jpg:
+              schema:
+                type: string
+                format: binary
