@@ -11,7 +11,7 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
   imagemagick
 
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list \
-  kubectl \
+  && apt-get update && apt-get install -y kubectl \
   && rm -rf /var/lib/apt/lists/*
 
 ##
