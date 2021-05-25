@@ -4,9 +4,14 @@ FROM python:3-buster
 ## Install OS Dependencies
 ##
 
-RUN apt-get update && apt-get install -y \
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+  && apt-get update && apt-get install -y \
+  apt-transport-https \
   libpwiz-tools \
-  imagemagick \
+  imagemagick
+
+RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list \
+  kubectl \
   && rm -rf /var/lib/apt/lists/*
 
 ##
