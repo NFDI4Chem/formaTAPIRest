@@ -14,6 +14,22 @@ servers:
   - url: http://localhost/
     description: Optional server description, e.g. Internal staging server for testing
 paths:
+  /ping:
+    get:
+      summary: Check if server alive
+      responses:
+        '200':
+          description: formaTAPIRest server alive
+  /list:
+    get:
+      summary: Get list of all convertes and their possible targets
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/xml:':
+              schema:
+                type: string
   /convert/png/to/jpg:
     post:
       tags:
