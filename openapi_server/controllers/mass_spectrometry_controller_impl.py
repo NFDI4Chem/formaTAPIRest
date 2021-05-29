@@ -47,7 +47,7 @@ def mkdtempalpha(dir=None, prefix='') -> str:
                 + ''.join(random.choices(string.ascii_lowercase, k=1)) \
                 + ''.join(random.choices(string.ascii_lowercase + string.digits, k=6)) \
                 + ''.join(random.choices(string.ascii_lowercase, k=1))
-            dirname = os.path.join(tempfile.gettempdir(), random_string)
+            dirname = os.path.join(dir, random_string)
             Path(dirname).mkdir(parents=False, exist_ok=False)
         except FileExistsError as e:
             print(dirname + " already exists")
