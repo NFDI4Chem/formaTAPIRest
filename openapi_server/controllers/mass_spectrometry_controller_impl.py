@@ -74,7 +74,7 @@ def create_k8s_job_obj(k8s_job_name=None, dockerimage=None, cmd=None):
     }
     return k8s_job_obj
 
-def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner="local"):  # noqa: E501
+def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
     """Convert mzXML mass spectrometry raw data to mzML
 
     Uses Proteowizard MSConvert to convert an mzXML file into mzML # noqa: E501
@@ -91,7 +91,7 @@ def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner="local"):  # noqa: E501
         directory_name = tempfile.mkdtemp(prefix="msconvert-")
         runcmd = ["msconvert"]
     elif runner == "docker":
-        directory_name = tempfile.mkdtemp(dir="/data/", prefix="msconvert-")
+        directory_name = tempfile.mkdtemp(prefix="msconvert-")
         runcmd = [ "docker", "run", "--rm", \
                    "-v", directory_name+":"+directory_name, \
                    dockerimage, \

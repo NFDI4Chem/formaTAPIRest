@@ -1,5 +1,6 @@
 import connexion
 import six
+from os import getenv
 
 ## OpenAPI generated Code stuff
 from openapi_server import util
@@ -16,4 +17,8 @@ def convert_pwi_zmz_xml2mz_ml(body=None):  # noqa: E501
     :rtype: file
     """
 
-    return convert_pwi_zmz_xml2mz_ml_impl(body, runner="local")
+    runner = "local" # Default
+    if getenv("TAPIR_RUNNER") is not None:
+        runner = getenv("TAPIR_RUNNER")
+
+    return convert_pwi_zmz_xml2mz_ml_impl(body, runner=runner)
