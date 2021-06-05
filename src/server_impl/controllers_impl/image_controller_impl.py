@@ -27,7 +27,7 @@ def convert_image_png2_jpg(body=None):  # noqa: E501
             infile.write(body)
 
             cmd = ["/usr/bin/convert", infilename, outfilename]
-            print (cmd, file=sys.stderr)            
+            print (cmd, file=sys.stderr)
             subprocess.call(cmd, shell=False)
 
         with open(outfilename, 'rb') as outfile:

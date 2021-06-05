@@ -46,6 +46,13 @@ Your OpenAPI definition lives here:
 http://localhost:{{serverPort}}{{contextPath}}/openapi.json
 ```
 
+Some example calls via CURL are:
+```
+curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  "accept: application/xml:" -H  "Content-Type: multipart/form-data" -F "profile=" -F "inputfile=@BSA-FT-HCD.raw;type=application/octet-stream"
+curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  "accept: application/xml:" -H  "Content-Type: multipart/form-data" -F "profile=xxx" -F "inputfile=@test.mzXML"
+```
+
+
 To launch the integration tests, use tox:
 ```
 sudo pip install tox
