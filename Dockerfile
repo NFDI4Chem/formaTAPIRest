@@ -7,8 +7,9 @@ FROM python:3-buster
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update && apt-get install -y \
   apt-transport-https \
+  nfs-common \
   libpwiz-tools \
-  imagemagick
+  imagemagick 
 
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list \
   && apt-get update && apt-get install -y kubectl \
