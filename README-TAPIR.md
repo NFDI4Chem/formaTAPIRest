@@ -7,6 +7,11 @@ is an example of building a OpenAPI-enabled Flask server.
 
 This example uses the [Connexion](https://github.com/zalando/connexion) library on top of Flask.
 
+The commandline was
+```
+docker run --rm --workdir /local -v ${PWD}:/local openapitools/openapi-generator-cli  generate -i /local/openapi/openapi.yaml  -g python-flask  -o /local
+```
+
 ## Requirements
 Python 3.5.2+
 

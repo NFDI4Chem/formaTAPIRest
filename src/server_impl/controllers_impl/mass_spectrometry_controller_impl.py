@@ -9,6 +9,7 @@ import time
 ## For K8S jobs
 import pykube
 from os import environ as os_environ
+from os import getenv
 from os.path import basename
 from pykube.config import KubeConfig
 from pykube.http import HTTPClient
@@ -114,7 +115,7 @@ def create_k8s_job_obj(k8s_job_name=None, dockerimage=None, cmd=None):
     }
     return k8s_job_obj
 
-def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
+def convert_pwi_zmz_xml2mz_ml(profile=None, inputfile=None):  # noqa: E501
     """Convert mzXML mass spectrometry raw data to mzML
 
     Uses Proteowizard MSConvert to convert an mzXML file into mzML # noqa: E501
@@ -126,6 +127,10 @@ def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
     """
 
     dockerimage = "chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:latest"
+
+    runner = "local" # Default
+    if getenv("TAPIR_RUNNER") is not None:
+        runner = getenv("TAPIR_RUNNER")
 
     if runner == "local":
         directory_name = mkdtempalpha(prefix="msconvert-")
@@ -152,32 +157,30 @@ def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
                 "--outfile", "output.mzML"]
 
     try:
-        with open(infilename, 'wb') as infile:
-            infile.write(body)
+        inputfile.save(infilename)
+        if runner == "local" or runner == "docker":
+            print (cmd, file=sys.stderr)
+            subprocess.call(cmd, shell=False)
+        elif runner == "kubernetes":
+            # This creates the PyKube configuration from ~/.kube/config
+            # pykube_api = HTTPClient(KubeConfig.from_file())
 
-            if runner == "local" or runner == "docker":
-                print (cmd, file=sys.stderr)
-                subprocess.call(cmd, shell=False)
-            elif runner == "kubernetes":
-                # This creates the PyKube configuration from ~/.kube/config
-                # pykube_api = HTTPClient(KubeConfig.from_file())
-
-                # This creates the PyKube configuration if run from inside a Pod
-                pykube_api = HTTPClient(KubeConfig.from_service_account())
-                k8s_job_obj = create_k8s_job_obj(jobid, dockerimage, cmd)
+            # This creates the PyKube configuration if run from inside a Pod
+            pykube_api = HTTPClient(KubeConfig.from_service_account())
+            k8s_job_obj = create_k8s_job_obj(jobid, dockerimage, cmd)
 
 
-                # Actually create that job
-                time.sleep(5)
-                Job(pykube_api, k8s_job_obj).create()
-                print ("submitted", file=sys.stderr)
+            # Actually create that job
+            time.sleep(5)
+            Job(pykube_api, k8s_job_obj).create()
+            print ("submitted", file=sys.stderr)
 
-                wait_for_job(pykube_api, jobid)
-                print ("finished", file=sys.stderr)
+            wait_for_job(pykube_api, jobid)
+            print ("finished", file=sys.stderr)
 
-                Job(pykube_api, k8s_job_obj).delete()
-                time.sleep(5)
-                print ("deleted", file=sys.stderr)
+            Job(pykube_api, k8s_job_obj).delete()
+            time.sleep(5)
+            print ("deleted", file=sys.stderr)
 
         with open(outfilename, 'rb') as outfile:
             data = outfile.read()

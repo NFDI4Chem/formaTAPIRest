@@ -1,38 +1,20 @@
 import connexion
 import six
-import subprocess
-import tempfile
-import sys
-import shutil
 
 from openapi_server import util
 
+import openapi_server.server_impl.controllers_impl.image_controller_impl as ImageController_impl
+
+#from openapi_server.server_impl.controllers_impl.image_controller_impl import ImageController_impl
 
 def convert_image_png2_jpg(body=None):  # noqa: E501
     """Convert a JPG image to PNG
 
     Uses ImageMagick to convert a JPG image to PNG # noqa: E501
 
-    :param body:
+    :param body: 
     :type body: str
 
     :rtype: file
     """
-
-    try:
-        directory_name = tempfile.mkdtemp()
-        infilename = directory_name+'/input.png'
-        outfilename = directory_name+'/output.jpg'
-        with open(infilename, 'wb') as infile:
-            infile.write(body)
-
-            cmd = ["/usr/bin/convert", infilename, outfilename]
-            print (cmd, file=sys.stderr)            
-            subprocess.call(cmd, shell=False)
-
-        with open(outfilename, 'rb') as outfile:
-            data = outfile.read()
-    finally:
-        shutil.rmtree(directory_name, ignore_errors=True)
-
-    return data
+    return ImageController_impl.convert_image_png2_jpg(body)  # noqa: E501

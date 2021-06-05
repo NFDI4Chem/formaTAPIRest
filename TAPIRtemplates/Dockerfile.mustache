@@ -1,4 +1,9 @@
+{{#supportPython2}}
+FROM python:2-buster
+{{/supportPython2}}
+{{^supportPython2}}
 FROM python:3-buster
+{{/supportPython2}}
 
 ##
 ## Install OS Dependencies
@@ -23,12 +28,22 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/
 
+{{#supportPython2}}
+RUN pip install --no-cache-dir -r requirements.txt
+{{/supportPython2}}
+{{^supportPython2}}
 RUN pip3 install --no-cache-dir -r requirements.txt
+{{/supportPython2}}
 
 COPY . /usr/src/app
 
-EXPOSE 8080
+EXPOSE {{serverPort}}
 
+{{#supportPython2}}
+ENTRYPOINT ["python"]
+{{/supportPython2}}
+{{^supportPython2}}
 ENTRYPOINT ["python3"]
+{{/supportPython2}}
 
-CMD ["-m", "openapi_server"]
+CMD ["-m", "{{packageName}}"]

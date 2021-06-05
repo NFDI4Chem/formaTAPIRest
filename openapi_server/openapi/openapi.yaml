@@ -20,15 +20,17 @@ paths:
       description: Uses Proteowizard MSConvert to convert an mzXML file into mzML
       operationId: convert_pwi_zmz_xml2mz_ml
       requestBody:
+        $ref: '#/components/requestBodies/inline_object'
         content:
-          'application/xml:':
+          multipart/form-data:
             schema:
-              format: binary
-              type: string
-          application/octet-stream:
-            schema:
-              format: binary
-              type: string
+              properties:
+                profile:
+                  type: string
+                inputfile:
+                  format: binary
+                  type: string
+              type: object
       responses:
         "200":
           content:
@@ -63,5 +65,39 @@ paths:
       tags:
       - Image
       x-openapi-router-controller: openapi_server.controllers.image_controller
+  /list:
+    get:
+      operationId: list_get
+      responses:
+        "200":
+          content:
+            'application/xml:':
+              schema:
+                type: string
+          description: OK
+      summary: Get list of all convertes and their possible targets
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /ping:
+    get:
+      operationId: ping_get
+      responses:
+        "200":
+          description: formaTAPIRest server alive
+      summary: Check if server alive
+      x-openapi-router-controller: openapi_server.controllers.default_controller
 components:
-  schemas: {}
+  requestBodies:
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+  schemas:
+    inline_object:
+      properties:
+        profile:
+          type: string
+        inputfile:
+          format: binary
+          type: string
+      type: object
