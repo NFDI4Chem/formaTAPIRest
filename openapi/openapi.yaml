@@ -60,14 +60,15 @@ paths:
       operationId: ConvertPWIZmzXML2mzML
       requestBody:
         content:
-          'application/xml:':
+          multipart/form-data:
             schema:
-              type: string
-              format: binary
-          'application/octet-stream':
-            schema:
-              type: string
-              format: binary
+              type: object
+              properties:
+                profile:
+                  type: string
+                inputfile:
+                  type: string
+                  format: binary
       responses:
         '200':
           description: Result file in mzML format

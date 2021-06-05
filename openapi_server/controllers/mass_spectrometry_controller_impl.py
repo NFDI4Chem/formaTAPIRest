@@ -17,7 +17,7 @@ from pykube.objects import (Job, Pod)
 ## OpenAPI generated Code stuff
 from openapi_server import util
 
-
+import math
 
 import tempfile
 import os.path
@@ -90,6 +90,7 @@ def create_k8s_job_obj(k8s_job_name=None, dockerimage=None, cmd=None):
                 "namespace": "chemotion", # "default",  # TODO this should be set from configs
                 "labels": {"app": k8s_job_name},
             },
+        "backoffLimit": "1",
         "spec": {
           "containers": [{
               "name": "c",
@@ -141,7 +142,8 @@ def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
     else:
         print ("unknown runner")
 
-    infilename = directory_name+'/input.mzXML'
+    #infilename = directory_name+'/input.mzXML'
+    infilename = directory_name+'/input.raw'
     outfilename = directory_name+'/output.mzML'
     jobid = basename(directory_name)
 
@@ -164,14 +166,70 @@ def convert_pwi_zmz_xml2mz_ml_impl(body=None, runner=None):  # noqa: E501
                 pykube_api = HTTPClient(KubeConfig.from_service_account())
                 k8s_job_obj = create_k8s_job_obj(jobid, dockerimage, cmd)
 
-                # Actually create that job
-                Job(pykube_api, k8s_job_obj).create()
 
-                time.sleep(60) # "Wait" until job shall be finished
+                # Actually create that job
+                time.sleep(5)
+                Job(pykube_api, k8s_job_obj).create()
+                print ("submitted", file=sys.stderr)
+
+                wait_for_job(pykube_api, jobid)
+                print ("finished", file=sys.stderr)
+
+                Job(pykube_api, k8s_job_obj).delete()
+                time.sleep(5)
+                print ("deleted", file=sys.stderr)
 
         with open(outfilename, 'rb') as outfile:
             data = outfile.read()
+            time.sleep(5)
+
     finally:
-        shutil.rmtree(directory_name, ignore_errors=True)
+        print ("not deleting workdir", file=sys.stderr)
+        #shutil.rmtree(directory_name, ignore_errors=True)
 
     return data
+
+
+def wait_for_job(pykube_api, job_id):
+    """Checks the state of a job already submitted on k8s."""
+
+    succeeded = 0
+    active = 0
+    failed = 0
+
+    #print (Job(pykube_api, jobs.response['items'][0]), file=sys.stderr)
+
+    jobs = Job.objects(pykube_api).filter(selector="app=" + job_id)
+    if len(jobs.response['items']) == 1:
+        iteration = 1
+        while True:
+            time.sleep(math.log2(iteration+1))
+            iteration += 1
+            jobs = Job.objects(pykube_api).filter(selector="app=" + job_id)
+            if len(jobs.response['items']) < 1:
+                continue
+
+            job = Job(pykube_api, jobs.response['items'][0])
+
+            if 'succeeded' in job.obj['status']:
+                succeeded = job.obj['status']['succeeded']
+            if 'active' in job.obj['status']:
+                active = job.obj['status']['active']
+            if 'failed' in job.obj['status']:
+                failed = job.obj['status']['failed']
+
+            print ("succeeded: ", succeeded, ", active: ", active, "failed: ", failed, file=sys.stderr)
+
+            # This assumes jobs dependent on a single pod, single container
+            if succeeded > 0:
+                print ("exit succeeded", file=sys.stderr)
+                return True
+            elif failed > 0 :
+                print ("exit failed", file=sys.stderr)
+                return False
+            elif active > 0 and failed <= 2:
+                print ("keep trying", file=sys.stderr)
+                continue
+            elif failed > 2:
+                print ("exit failed", file=sys.stderr)
+                return False
