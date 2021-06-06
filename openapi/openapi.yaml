@@ -9,7 +9,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
-  - url: http://msbi.ipb-halle.de/formaTAPIRest/v1
+  - url: https://msbi.ipb-halle.de/formaTAPIRest/v1
     description: Public test server @ IPB Halle, e.g. nearly Main (production) server
   - url: http://localhost/
     description: Optional server description, e.g. Internal staging server for testing

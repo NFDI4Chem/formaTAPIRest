@@ -11,7 +11,7 @@ info:
   version: 0.0.1
 servers:
 - description: Public test server @ IPB Halle, e.g. nearly Main (production) server
-  url: http://msbi.ipb-halle.de/formaTAPIRest/v1
+  url: https://msbi.ipb-halle.de/formaTAPIRest/v1
 - description: Optional server description, e.g. Internal staging server for testing
   url: http://localhost/
 paths:
