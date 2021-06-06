@@ -81,14 +81,14 @@ def create_k8s_job_obj(k8s_job_name=None, dockerimage=None, cmd=None):
               # metadata.name is the name of the pod resource created, and must be unique
               # http://kubernetes.io/docs/user-guide/configuring-containers/
               "name": k8s_job_name,
-              "namespace": "chemotion", # "default",  # TODO this should be set
+#              "namespace": "chemotion", # "default",  # TODO this should be set
               "labels": {"app": k8s_job_name},
           },
       "spec": {
         "template": {
         "metadata": {
                 "name": k8s_job_name,
-                "namespace": "chemotion", # "default",  # TODO this should be set from configs
+#                "namespace": "chemotion", # "default",  # TODO this should be set from configs
                 "labels": {"app": k8s_job_name},
             },
         "backoffLimit": "1",
