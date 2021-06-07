@@ -50,6 +50,7 @@ http://localhost:{{serverPort}}{{contextPath}}/openapi.json
 
 Some example calls via CURL are:
 ```
+curl -X POST "https://msbi.ipb-halle.de/formaTAPIRest/v1/convert/png/to/jpg" -H  "accept: image/jpg" -H  "Content-Type: image/png" -d @kitten.png
 curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  "accept: application/xml:" -H  "Content-Type: multipart/form-data" -F "profile=" -F "inputfile=@BSA-FT-HCD.raw;type=application/octet-stream"
 curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  "accept: application/xml:" -H  "Content-Type: multipart/form-data" -F "profile=xxx" -F "inputfile=@test.mzXML"
 ```
