@@ -49,33 +49,6 @@ sudo pip install tox
 tox
 ```
 
-## Python example
-```
-import requests
-```
-
-Test if server is active
-```
-req = requests.get('http://localhost:8080/formaTAPIRest/v1/ping')
-print(req.status_code)
-```
-
-Get list of available conversions
-```
-req = requests.get('http://localhost:8080/formaTAPIRest/v1/list')
-print(req.text)
-```
-
-Test by converting png into jpg image
-```
-with open('kitty.png', 'rb') as f:
-    data = f.read()
-req = requests.post(url='http://localhost:8080/formaTAPIRest/v1/convert/png/to/jpg', data=data, headers={'Content-Type': 'application/octet-stream'})
-print(req.status_code)
-with open('kitty.jpg', 'wb') as f:
-    f.write(req.content)
-```
-
 ## Running with Docker
 
 To run the server on a Docker container, please execute the following from the root directory:
