@@ -43,7 +43,6 @@ curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  
 curl -X POST "http://localhost:8080/formaTAPIRest/v1/convert/mzXML/to/mzML" -H  "accept: application/xml:" -H  "Content-Type: multipart/form-data" -F "profile=xxx" -F "inputfile=@test.mzXML"
 ```
 
-
 To launch the integration tests, use tox:
 ```
 sudo pip install tox
