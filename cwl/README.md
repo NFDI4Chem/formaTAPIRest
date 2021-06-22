@@ -26,6 +26,26 @@ parameters: []
 out_file: myPic.jpg
 ```
 
+## Example: mzXML2mzML conversion
+```yml
+cwl:tool: ./openmsconvert.cwl
+in_file:
+  class: File
+  format: edam:format_3654
+  path: RtmpIX4kGntest_write.mzXML
+parameters: []
+```
+
+## Example: RAW2mzML conversion
+```yml
+cwl:tool: ./vendormsconvert.cwl
+in_file:
+  class: File
+  format: edam:format_3712
+  path: /tmp/nuts/fa3.RAW
+parameters: []
+```
+
 # Helpful hints
 - Labels can be only single line strings without :
 - python code can be embedded
