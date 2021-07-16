@@ -46,7 +46,11 @@ in_file:
 parameters: []
 ```
 
-# Helpful hints
-- Labels can be only single line strings without :
-- python code can be embedded
-  https://rabix.io/cwl.html
+# List of converters
+| file name           | label                                                          | input                       | output                                        | author             |
+|:--------------------|:---------------------------------------------------------------|:----------------------------|:----------------------------------------------|:-------------------|
+| dummy.cwl           | Dummy test (calculate md5sum) of input->output conversion      | any file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
+| openmsconvert.cwl   | Uses Proteowizard MSConvert to convert an mzXML file into mzML | mzXML file format           | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
+| osc2hdf.cwl         | convent osc file to hdf5 file                                  | osc file                    | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
+| png2jpg.cwl         | Convert png to jpg image                                       | png file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
+| vendormsconvert.cwl | Uses Proteowizard MSConvert to convert vendor files into mzML  | mzXML or vendor file format | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
