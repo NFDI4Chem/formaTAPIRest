@@ -1,5 +1,0 @@
-cwl:tool: ./test.cwl
-in_file:
-  class: File
-  path: ./EBSD.osc
-out_file: output.hdf5
