@@ -4,6 +4,12 @@ cwlVersion: v1.0
 class: CommandLineTool
 label: Uses Bruker TopSpin to convert NMR data to JCAMP-DX
 
+requirements:
+  InitialWorkDirRequirement:
+    listing:
+      - entry: $(inputs.in_dir)        
+        writable: true
+
 baseCommand: myjcampdx.sh
 
 hints:

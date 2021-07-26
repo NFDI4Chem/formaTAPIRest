@@ -1,0 +1,5 @@
+cwl:tool: unzip.cwl
+in_file:
+  class: File
+  path: /home/bionic-sneumann/nmrML/code/examples/working.tmp/MTBLS1_DiagramUseCase/MTBLS1/ADG10003u_023.zip
+out_dirname: ././.
