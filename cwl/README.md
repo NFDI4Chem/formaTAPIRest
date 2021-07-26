@@ -28,7 +28,7 @@ out_file: myPic.jpg
 
 ## Example: mzXML2mzML conversion
 ```yml
-cwl:tool: ./openmsconvert.cwl
+cwl:tool: ./libremsconvert.cwl
 in_file:
   class: File
   format: edam:format_3654
@@ -38,7 +38,7 @@ parameters: []
 
 ## Example: RAW2mzML conversion
 ```yml
-cwl:tool: ./vendormsconvert.cwl
+cwl:tool: ./msconvert.cwl
 in_file:
   class: File
   format: edam:format_3712
@@ -50,7 +50,7 @@ parameters: []
 | file name           | label                                                          | input                       | output                                        | author             |
 |:--------------------|:---------------------------------------------------------------|:----------------------------|:----------------------------------------------|:-------------------|
 | dummy.cwl           | Dummy test (calculate md5sum) of input->output conversion      | any file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
-| openmsconvert.cwl   | Uses Proteowizard MSConvert to convert an mzXML file into mzML | mzXML file format           | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
+| libremsconvert.cwl   | Uses Proteowizard MSConvert to convert an mzXML file into mzML | mzXML file format           | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
 | osc2hdf.cwl         | convent osc file to hdf5 file                                  | osc file                    | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
 | png2jpg.cwl         | Convert png to jpg image                                       | png file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
-| vendormsconvert.cwl | Uses Proteowizard MSConvert to convert vendor files into mzML  | mzXML or vendor file format | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
+| msconvert.cwl | Uses Proteowizard MSConvert to convert vendor files into mzML  | mzXML or vendor file format | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |

@@ -28,7 +28,7 @@ out_file: myPic.jpg
 
 ## Example: mzXML2mzML conversion
 ```yml
-cwl:tool: ./openmsconvert.cwl
+cwl:tool: ./libremsconvert.cwl
 in_file:
   class: File
   format: edam:format_3654
@@ -38,7 +38,7 @@ parameters: []
 
 ## Example: RAW2mzML conversion
 ```yml
-cwl:tool: ./vendormsconvert.cwl
+cwl:tool: ./msconvert.cwl
 in_file:
   class: File
   format: edam:format_3712
