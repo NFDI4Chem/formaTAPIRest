@@ -113,6 +113,7 @@ requirements:
 outputs:
   outfile:
     type: File
+    format: edam:format_3590
     outputBinding:
       glob: $(inputs.out_file)
 
@@ -121,3 +122,10 @@ s:author:
     s:identifier: https://orcid.org/0000-0003-0930-082X
     s:email: mailto:sbrinckm@gmail.com
     s:name: Steffen Brinckmann
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+$schemas:
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
+  - http://edamontology.org/EDAM_1.18.owl

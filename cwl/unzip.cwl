@@ -15,6 +15,7 @@ inputs:
   in_file:
     type: File
     label: ZIP file
+    format: edam:format_3987
     inputBinding:
       position: 4
   out_dirname:
@@ -34,3 +35,10 @@ s:author:
     s:identifier: https://orcid.org/0000-0002-7899-7192
     s:email: mailto:sneumann@ipb-halle.de
     s:name: Steffen Neumann
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+$schemas:
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
+  - http://edamontology.org/EDAM_1.18.owl
