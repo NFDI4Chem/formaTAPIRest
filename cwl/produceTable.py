@@ -12,10 +12,23 @@ for fileName in os.listdir('.'):
   with open(fileName, "r") as cwl_h:
 	  yaml_obj = yaml.main.round_trip_load(cwl_h, preserve_quotes=True)
   dfAll = dfAll.append(yaml_obj, ignore_index=True)
+  if 'in_file' in yaml_obj['inputs']:
+      inname = 'in_file'
+  elif 'in_dir' in yaml_obj['inputs']:
+      inname = 'in_dir'
+  if 'outfile' in yaml_obj['outputs']:
+      outname = 'outfile'
+  elif 'out_dir' in yaml_obj['outputs']:
+      outname = 'out_dir'
+  if 'outputBinding' in yaml_obj['outputs'][outname]:
+      outlink = 'outputBinding'
+  elif 'outputSource' in yaml_obj['outputs'][outname]:
+      outlink = 'outputSource'
+
   dset  = {'file name':fileName,
            'label':yaml_obj['label'],
-           'input':yaml_obj['inputs']['in_file']['label'],
-           'output':yaml_obj['outputs']['outfile']['outputBinding'],
+           'input':yaml_obj['inputs'][inname]['label'],
+           'output':yaml_obj['outputs'][outname][outlink],
            'author':yaml_obj['s:author'][0]['s:name']}
   dfPart= dfPart.append(dset, ignore_index=True)
 

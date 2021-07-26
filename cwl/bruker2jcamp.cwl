@@ -7,7 +7,7 @@ label: Uses Bruker TopSpin to convert NMR data to JCAMP-DX
 requirements:
   InitialWorkDirRequirement:
     listing:
-      - entry: $(inputs.in_dir)        
+      - entry: $(inputs.in_dir)
         writable: true
 
 baseCommand: myjcampdx.sh
@@ -37,6 +37,7 @@ inputs:
 outputs:
   outfile:
     type: File
+    label: JCAMP-DX spectrum
     format: edam:format_3245
     outputBinding:
       glob: $(inputs.out_file)

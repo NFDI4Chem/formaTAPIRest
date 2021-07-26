@@ -2,9 +2,12 @@
 
 cwlVersion: v1.0
 class: Workflow
+label: Uses Bruker TopSpin to convert a zipped NMR data directory to JCAMP-DX
+
 inputs:
   in_file:
     type: File
+    label: Zipped Bruker NMR data directory
   tmpdir:
       type: string
       default: "."
@@ -14,8 +17,9 @@ inputs:
   out_file: string
 
 outputs:
-  out_file:
+  outfile:
     type: File
+    label: JCAMP-DX spectrum file
     format: edam:format_3245
     outputSource: convert/outfile
 
@@ -34,6 +38,12 @@ steps:
       parameters: dummyparameters
       out_file: out_file
     out: [outfile]
+
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0002-7899-7192
+    s:email: mailto:sneumann@ipb-halle.de
+    s:name: Steffen Neumann
 
 $namespaces:
   s: https://schema.org/

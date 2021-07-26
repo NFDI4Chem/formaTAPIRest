@@ -47,10 +47,14 @@ parameters: []
 ```
 
 # List of converters
-| file name           | label                                                          | input                       | output                                        | author             |
-|:--------------------|:---------------------------------------------------------------|:----------------------------|:----------------------------------------------|:-------------------|
-| dummy.cwl           | Dummy test (calculate md5sum) of input->output conversion      | any file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
-| libremsconvert.cwl   | Uses Proteowizard MSConvert to convert an mzXML file into mzML | mzXML file format           | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
-| osc2hdf.cwl         | convent osc file to hdf5 file                                  | osc file                    | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
-| png2jpg.cwl         | Convert png to jpg image                                       | png file format             | ordereddict([('glob', '$(inputs.out_file)')]) | Steffen Brinckmann |
-| msconvert.cwl | Uses Proteowizard MSConvert to convert vendor files into mzML  | mzXML or vendor file format | ordereddict([('glob', '*.mzML')])             | Steffen Neumann    |
+| file name               | label                                                                  | input                            | output                                             | author             |
+|:------------------------|:-----------------------------------------------------------------------|:---------------------------------|:---------------------------------------------------|:-------------------|
+| dummy.cwl               | Dummy test (calculate md5sum) of input->output conversion              | any file format                  | ordereddict([('glob', '$(inputs.out_file)')])      | Steffen Brinckmann |
+| png2jpg.cwl             | Convert png to jpg image                                               | png file format                  | ordereddict([('glob', '$(inputs.out_file)')])      | Steffen Brinckmann |
+| osc2hdf.cwl             | convent osc file to hdf5 file                                          | osc file                         | ordereddict([('glob', '$(inputs.out_file)')])      | Steffen Brinckmann |
+| msconvert.cwl           | Uses Proteowizard MSConvert to convert vendor files into mzML          | mzXML or vendor file format      | ordereddict([('glob', '*.mzML')])                  | Steffen Neumann    |
+| libremsconvert.cwl      | Uses Proteowizard MSConvert to convert an mzXML file into mzML         | mzXML file format                | ordereddict([('glob', '*.mzML')])                  | Steffen Neumann    |
+| bruker2jcamp.cwl        | Uses Bruker TopSpin to convert NMR data to JCAMP-DX                    | Bruker NMR data directory        | ordereddict([('glob', '$(inputs.out_file)')])      | Steffen Neumann    |
+| zip.cwl                 | ZIP an entire directory                                                | data directory to be zipped      | ordereddict([('glob', '$(inputs.out_file)')])      | Steffen Neumann    |
+| unzip.cwl               | Extract the entire content of a file                                   | ZIP file                         | ordereddict([('glob', '$(inputs.out_dirname)/*')]) | Steffen Neumann    |
+| zipped2bruker2jcamp.cwl | Uses Bruker TopSpin to convert a zipped NMR data directory to JCAMP-DX | Zipped Bruker NMR data directory | convert/outfile                                    | Steffen Neumann    |
