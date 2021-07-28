@@ -8,6 +8,7 @@ inputs:
   in_file:
     type: File
     label: Zipped Bruker NMR data directory
+    format: Zipped Bruker NMR data directory
   tmpdir:
       type: string
       default: "."

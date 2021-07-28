@@ -20,6 +20,7 @@ inputs:
   in_dir:
     type: Directory
     label: Bruker NMR data directory
+    format: Bruker NMR data directory
     doc: |-
       vendor: Bruker
       instrument: NMR

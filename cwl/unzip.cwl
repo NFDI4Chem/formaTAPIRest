@@ -2,7 +2,7 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: Extract the entire content of a file
+label: Extract the entire content of a ZIP archive
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -27,6 +27,7 @@ outputs:
   out_dir:
     type: Directory
     label: Directory with extracted files
+    format: edam:format_1915c
     outputBinding:
       glob: "$(inputs.out_dirname)/*"
 

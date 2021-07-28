@@ -4,9 +4,9 @@ Put the yml code into default.yml and run it with
 cwl-runner default.yml
 ```
 
-## Example: dummy test
+## Example: md5sum test
 ```yml
-cwl:tool: ./dummy.cwl
+cwl:tool: ./md5sum.cwl
 in_file:
   class: File
   format: http://edamontology.org/format_3603

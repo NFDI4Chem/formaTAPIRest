@@ -28,7 +28,10 @@ for fileName in os.listdir('.'):
   dset  = {'file name':fileName,
            'label':yaml_obj['label'],
            'input':yaml_obj['inputs'][inname]['label'],
-           'output':yaml_obj['outputs'][outname][outlink],
+           'input':yaml_obj['inputs'][inname]['format'],
+#           'output':yaml_obj['outputs'][outname][outlink],
+           'output':yaml_obj['outputs'][outname]['label'],
+           'output':yaml_obj['outputs'][outname]['format'],
            'author':yaml_obj['s:author'][0]['s:name']}
   dfPart= dfPart.append(dset, ignore_index=True)
 

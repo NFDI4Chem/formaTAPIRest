@@ -25,6 +25,7 @@ inputs:
 outputs:
   outfile:
     type: File
+    label: mzML file
     format: edam:format_3244
     outputBinding:
       glob: "*.mzML"

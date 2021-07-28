@@ -9,7 +9,7 @@ baseCommand: convert
 inputs:
   in_file:
     type: File
-    label: png file format
+    label: png image
     doc: |-
        vendor: Internet Engineering Task Force
        instrument:
@@ -28,6 +28,8 @@ inputs:
 outputs:
   outfile:
     type: File
+    label: jpg image
+    format: edam:format_3579
     outputBinding:
       glob: $(inputs.out_file)
 

@@ -16,6 +16,7 @@ inputs:
   in_file:
     type: File
     label: osc file
+    format: edam:format_2330
     doc: |-
        vendor:
        instrument:
@@ -113,6 +114,7 @@ requirements:
 outputs:
   outfile:
     type: File
+    label: converted to HDF5
     format: edam:format_3590
     outputBinding:
       glob: $(inputs.out_file)
