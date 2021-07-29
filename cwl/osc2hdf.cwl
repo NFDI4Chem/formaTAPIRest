@@ -2,7 +2,7 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: convent osc file to hdf5 file
+label: convent osc file to hdf5 file (partial conversion)
 
 baseCommand: ["sh","script.sh"]
 
@@ -113,7 +113,7 @@ requirements:
 outputs:
   outfile:
     type: File
-    label: converted to HDF5
+    label: orix HDF5 file (pypi.org/project/orix)
     format: edam:format_3590
     outputBinding:
       glob: $(inputs.out_file)

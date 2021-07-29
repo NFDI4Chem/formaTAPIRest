@@ -25,6 +25,8 @@ for fileName in os.listdir('.'):
   elif 'outputSource' in yaml_obj['outputs'][outname]:
       outlink = 'outputSource'
 
+  if 'format' not in yaml_obj['inputs'][inname]:
+    yaml_obj['inputs'][inname]['format'] = yaml_obj['inputs'][inname]['label']
   dset  = {'file name':fileName,
            'label':yaml_obj['label'],
            'input':yaml_obj['inputs'][inname]['label'],

@@ -47,6 +47,18 @@ parameters: []
 ```
 
 # Notes for developers of cwl-files
--
+
+## Rules
+Files must have the following content, which is partly checked by produceTable.py:
+- a top-level label is required
+- author information (name and orcid-link)
+- input files require a label and optionally a doc-string
+- output files require EDAM classification and  a label
+
+## Examples for conversion
+- based on a command: png2jpg.cwl
+- multiple steps: zipped2bruker2jcamp.yml
+- use docker image: msconvert.yml
+- use python with specific dependencies (incl. pull python-docker): osc2hdf.yml
 
 # List of converters
