@@ -15,10 +15,10 @@ hints:
 inputs:
   in_file:
     type: File
-    label: osc file
+    label: EDAX binary file (.osc) with EBSD data
     doc: |-
-       vendor:
-       instrument:
+       vendor: EDAX Ametek
+       software: old OIM versions
   out_file:
     type: string
 
@@ -119,5 +119,4 @@ outputs:
 s:author:
   - class: s:Person
     s:identifier: https://orcid.org/0000-0003-0930-082X
-    s:email: mailto:sbrinckm@gmail.com
     s:name: Steffen Brinckmann

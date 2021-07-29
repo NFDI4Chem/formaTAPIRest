@@ -46,4 +46,7 @@ in_file:
 parameters: []
 ```
 
+# Notes for developers of cwl-files
+-
+
 # List of converters
