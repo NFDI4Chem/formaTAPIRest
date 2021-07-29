@@ -2,7 +2,7 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: convent osc file to hdf5 file
+label: convent osc file to hdf5 file (partial conversion)
 
 baseCommand: ["sh","script.sh"]
 
@@ -15,11 +15,10 @@ hints:
 inputs:
   in_file:
     type: File
-    label: osc file
-    format: edam:format_2330
+    label: EDAX binary file (.osc) with EBSD data
     doc: |-
-       vendor:
-       instrument:
+       vendor: EDAX Ametek
+       software: old OIM versions
   out_file:
     type: string
 
@@ -114,7 +113,7 @@ requirements:
 outputs:
   outfile:
     type: File
-    label: converted to HDF5
+    label: orix HDF5 file (pypi.org/project/orix)
     format: edam:format_3590
     outputBinding:
       glob: $(inputs.out_file)
@@ -122,7 +121,6 @@ outputs:
 s:author:
   - class: s:Person
     s:identifier: https://orcid.org/0000-0003-0930-082X
-    s:email: mailto:sbrinckm@gmail.com
     s:name: Steffen Brinckmann
 
 $namespaces:

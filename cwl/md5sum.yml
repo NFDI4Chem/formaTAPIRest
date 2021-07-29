@@ -1,7 +1,0 @@
-cwl:tool: ./md5sum.cwl
-in_file:
-  class: File
-  format: http://edamontology.org/format_3603
-  path: ../../../screenshot-88748634.png
-parameters: [--text, --tag]
-out_file: myOutput.txt
