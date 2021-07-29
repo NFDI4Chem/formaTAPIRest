@@ -1,0 +1,6 @@
+cwl:tool: ./bruker2jcamp.cwl
+in_dir:
+  class: Directory
+  path: /home/sneumann/NFDI4Chem/github/container-topspin/testdata/ADG10003u_023/
+parameters: []
+out_file: ADG10003u_023.jdx

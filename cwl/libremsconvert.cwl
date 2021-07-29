@@ -2,18 +2,18 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: Uses Proteowizard MSConvert to convert vendor files into mzML
+label: Uses Proteowizard MSConvert to convert an mzXML file into mzML
 
-baseCommand: ["wine", "msconvert"]
-hints:
-  DockerRequirement:
-    dockerPull: chambm/pwiz-skyline-i-agree-to-the-vendor-licenses
+baseCommand: msconvert
 
 inputs:
   in_file:
     type: File
-    label: mzXML or vendor file format
-    format: edam:format_3245
+    label: mzXML file format
+    doc: |-
+       vendor: Common file format for mass spectrometric data developed at the SPC/ISB.
+       instrument:
+    format: edam:format_3654
     inputBinding:
       position: 1
   parameters:
@@ -25,6 +25,7 @@ inputs:
 outputs:
   outfile:
     type: File
+    label: mzML file
     format: edam:format_3244
     outputBinding:
       glob: "*.mzML"

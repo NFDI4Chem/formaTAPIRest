@@ -113,6 +113,8 @@ requirements:
 outputs:
   outfile:
     type: File
+    label: converted to HDF5
+    format: edam:format_3590
     outputBinding:
       glob: $(inputs.out_file)
 
@@ -120,3 +122,10 @@ s:author:
   - class: s:Person
     s:identifier: https://orcid.org/0000-0003-0930-082X
     s:name: Steffen Brinckmann
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+$schemas:
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
+  - http://edamontology.org/EDAM_1.18.owl

@@ -4,9 +4,9 @@ Put the yml code into default.yml and run it with
 cwl-runner default.yml
 ```
 
-## Example: dummy test
+## Example: md5sum test
 ```yml
-cwl:tool: ./dummy.cwl
+cwl:tool: ./md5sum.cwl
 in_file:
   class: File
   format: http://edamontology.org/format_3603
@@ -28,7 +28,7 @@ out_file: myPic.jpg
 
 ## Example: mzXML2mzML conversion
 ```yml
-cwl:tool: ./openmsconvert.cwl
+cwl:tool: ./libremsconvert.cwl
 in_file:
   class: File
   format: edam:format_3654
@@ -38,7 +38,7 @@ parameters: []
 
 ## Example: RAW2mzML conversion
 ```yml
-cwl:tool: ./vendormsconvert.cwl
+cwl:tool: ./msconvert.cwl
 in_file:
   class: File
   format: edam:format_3712

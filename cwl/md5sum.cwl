@@ -11,6 +11,7 @@ inputs:
   in_file:
     type: File
     label: any file format
+    format: edam:format_1915
     doc: |-
        vendor:
        instrument:
@@ -25,7 +26,9 @@ inputs:
 
 outputs:
   outfile:
+    label: File containing md5sum
     type: File
+    format: ncit:NCIT_C171276
     outputBinding:
       glob: $(inputs.out_file)
 
@@ -43,6 +46,8 @@ s:license: https://spdx.org/licenses/MIT
 $namespaces:
   s: https://schema.org/
   edam: http://edamontology.org/
+  ncit: https://ncithesaurus.nci.nih.gov/
 $schemas:
   - https://schema.org/version/latest/schemaorg-current-http.rdf
   - http://edamontology.org/EDAM_1.18.owl
+  - http://purl.obolibrary.org/obo/ncit.owl

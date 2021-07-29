@@ -1,4 +1,4 @@
-cwl:tool: ./dummy.cwl
+cwl:tool: ./md5sum.cwl
 in_file:
   class: File
   format: http://edamontology.org/format_3603

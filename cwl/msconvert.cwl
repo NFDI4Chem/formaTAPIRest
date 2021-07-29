@@ -2,41 +2,39 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: Convert png to jpg image
+label: Uses Proteowizard MSConvert to convert vendor files into mzML
 
-baseCommand: convert
+baseCommand: ["wine", "msconvert"]
+hints:
+  DockerRequirement:
+    dockerPull: chambm/pwiz-skyline-i-agree-to-the-vendor-licenses
 
 inputs:
   in_file:
     type: File
-    label: png image
-    doc: |-
-       vendor: Internet Engineering Task Force
-       instrument:
-    format: edam:format_3603
+    label: mzXML or vendor file format
+    format: edam:format_3245
     inputBinding:
-      position: 2
+      position: 1
   parameters:
     type: string[]
     inputBinding:
-      position: 1
-  out_file:
-    type: string
-    inputBinding:
-      position: 3
+      position: 2
+
 
 outputs:
   outfile:
     type: File
-    label: jpg image
-    format: edam:format_3579
+    label: mzML file
+    format: edam:format_3244
     outputBinding:
-      glob: $(inputs.out_file)
+      glob: "*.mzML"
 
 s:author:
   - class: s:Person
-    s:identifier: https://orcid.org/0000-0003-0930-082X
-    s:name: Steffen Brinckmann
+    s:identifier: https://orcid.org/0000-0002-7899-7192
+    s:email: mailto:sneumann@ipb-halle.de
+    s:name: Steffen Neumann
 
 s:citation: https://dx.doi.org/10.6084/m9.figshare.3115156.v2
 s:codeRepository: https://github.com/common-workflow-language/common-workflow-language

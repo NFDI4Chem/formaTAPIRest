@@ -2,32 +2,46 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-label: Uses Proteowizard MSConvert to convert an mzXML file into mzML
+label: Uses Bruker TopSpin to convert NMR data to JCAMP-DX
 
-baseCommand: msconvert
+requirements:
+  InitialWorkDirRequirement:
+    listing:
+      - entry: $(inputs.in_dir)
+        writable: true
+
+baseCommand: myjcampdx.sh
+
+hints:
+  DockerRequirement:
+    dockerImageId: nfdi4chem/topspin:4.1.1.2-0.1
 
 inputs:
-  in_file:
-    type: File
-    label: mzXML file format
+  in_dir:
+    type: Directory
+    label: Bruker NMR data directory
+    format: Bruker NMR data directory
     doc: |-
-       vendor: Common file format for mass spectrometric data developed at the SPC/ISB.
-       instrument:
-    format: edam:format_3654
+      vendor: Bruker
+      instrument: NMR
     inputBinding:
-      position: 1
+        position: 1
   parameters:
     type: string[]
     inputBinding:
+      position: 3
+  out_file:
+    type: string
+    inputBinding:
       position: 2
-
 
 outputs:
   outfile:
     type: File
-    format: edam:format_3244
+    label: JCAMP-DX spectrum
+    format: edam:format_3245
     outputBinding:
-      glob: "*.mzML"
+      glob: $(inputs.out_file)
 
 s:author:
   - class: s:Person
