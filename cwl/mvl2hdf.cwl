@@ -16,7 +16,7 @@ inputs:
     label: Doli binary file (.mvl) for tension-compression machine
     doc: |-
       vendor: Doli (www.doli.de)
-      software: Version 2.0
+      software: Test&Motion (Software for Universal Test Machines for Windows) Version 4.1
   out_file:
     type: string
 
@@ -109,8 +109,10 @@ requirements:
           addData(str(n)+'d', fOut, 'time',         's')
           addData(str(n)+'f', fOut, 'displacement', 'mm')
           addData(str(n)+'f', fOut, 'force',        'N')
-          # last data
-          # - unclear where existence and unit of this are stored
+          # if more than 1 channels are stored:
+          # - number of channels/sensors and its labeling are part of the machine configuration
+          # - Machine configuration is stored in mdb database (MS standard jet) DB_UTM.mdb and there in table tblUTM
+          #   -> use "mdb-export DB_UTM.mdb tblUTM > DB_UTM.csv" to convert it; Column "Machine1"
           # - this code: continue reading until failure
           idx = 0
           while True:
