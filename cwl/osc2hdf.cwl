@@ -6,23 +6,20 @@ label: convent osc file to hdf5 file (partial conversion)
 
 baseCommand: ["sh","script.sh"]
 
-# get python docker:slim has some packages included: numpy and matplotlib
 hints:
   DockerRequirement:
     dockerPull: python
 
-# define interfaces: input and output files
 inputs:
   in_file:
     type: File
     label: EDAX binary file (.osc) with EBSD data
     doc: |-
-       vendor: EDAX Ametek
-       software: old OIM versions
+      vendor: EDAX Ametek
+      software: old OIM versions
   out_file:
     type: string
 
-#create the required files
 requirements:
   InitialWorkDirRequirement:
     listing:
@@ -38,14 +35,19 @@ requirements:
       # python script that does the work
       - entryname: convert.py
         entry: |-
-          import math
+          import math, h5py, sys, os, hashlib
           import numpy as np
           from diffpy.structure import Structure
-          from orix.io import load, save
+          from orix.io import load, save                      #CWL requirement
           from orix.crystal_map import CrystalMap, PhaseList
           from orix.quaternion.rotation import Rotation
 
-          f = open('$(inputs.in_file.path)',"r")
+          convURI = 'https://raw.githubusercontent.com/NFDI4Chem/formaTAPIRest/main/cwl/osc2hdf.cwl'
+          convVersion = '1.0'
+
+          fileNameIn = '$(inputs.in_file.path)'
+          fileNameOut= '$(inputs.out_file)'
+          f = open(fileNameIn,"r")
 
           def find_subsequence(seq, subseq):
             target = np.dot(subseq, subseq)
@@ -106,10 +108,22 @@ requirements:
 
           #some corrections
           ebsd2.scan_unit = "um"
-          save(filename='$(inputs.out_file)', object2write=ebsd2)
-          print("Done")
+          save(filename=fileNameOut, object2write=ebsd2)
+          f.close()
 
-# define the output
+          #add converter information
+          fIn   = open(fileNameIn,'br')
+          fOut  = h5py.File(fileNameOut, 'a')
+          converter = fOut.create_group("converter")
+          converter.attrs['uri'] =     convURI
+          converter.attrs['version'] = convVersion
+          converter.attrs['original file name'] = fileNameIn
+          md5Hash = hashlib.md5()
+          md5Hash.update(fIn.read())
+          converter.attrs['original md5-sum'] = md5Hash.hexdigest()
+          fIn.close()
+          fOut.close()
+
 outputs:
   outfile:
     type: File
